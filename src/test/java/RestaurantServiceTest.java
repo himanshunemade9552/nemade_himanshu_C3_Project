@@ -37,9 +37,6 @@ class RestaurantServiceTest {
     	Assertions.assertThrows(restaurantNotFoundException.class, ()->{
     		service.findRestaurantByName("john's cafe");
     	});
-    	Assertions.assertThrows(restaurantNotFoundException.class, ()->{
-    		service.findRestaurantByName("john's cafe");
-    	}, "john's cafe");
     }
     //<<<<<<<<<<<<<<<<<<<<SEARCHING>>>>>>>>>>>>>>>>>>>>>>>>>>
 
