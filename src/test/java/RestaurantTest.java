@@ -59,5 +59,14 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+    //<<<<<<<<<<<<<<<<<<<<<<<Order details>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+    @Test
+    public void calculate_order_value_for_selected_items_should_return_sum_of_their_prices() {
+    	List<String> testData = new ArrayList<>();
+    	testData.add("Sweet corn soup");
+    	testData.add("Vegetable lasagne");
+    	int actualAmount = restaurant.calculateTotalAmount(testData);
+    	Assertions.assertEquals(388, actualAmount);
+    }    
+   //<<<<<<<<<<<<<<<<<<<<<<<Order details>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
