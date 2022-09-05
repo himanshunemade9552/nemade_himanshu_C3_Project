@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -22,21 +23,17 @@ class RestaurantTest {
     //-------FOR THE 2 TESTS BELOW, YOU MAY USE THE CONCEPT OF MOCKING, IF YOU RUN INTO ANY TROUBLE
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
-    	restaurant=new Restaurant("A1",
-    			"Pune", 
-    			LocalTime.now().minusHours(10), 
-    			LocalTime.now().plusHours(2));
-    	Assertions.assertTrue(restaurant.isRestaurantOpen());
+    	Restaurant restaurantTest = Mockito.spy(restaurant);
+    	Mockito.when(restaurantTest.getCurrentTime()).thenReturn(LocalTime.parse("12:30:00"));
+    	Assertions.assertTrue(restaurantTest.isRestaurantOpen());
     	
     }
 
     @Test
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time(){
-    	restaurant=new Restaurant("A1",
-    			"Pune", 
-    			LocalTime.now().minusHours(10), 
-    			LocalTime.now().minusMinutes(10));
-    	Assertions.assertFalse(restaurant.isRestaurantOpen());
+    	Restaurant restaurantTest = Mockito.spy(restaurant);
+    	Mockito.when(restaurantTest.getCurrentTime()).thenReturn(LocalTime.parse("09:30:00"));
+    	Assertions.assertFalse(restaurantTest.isRestaurantOpen());
 
     }
 
@@ -62,14 +59,5 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    //<<<<<<<<<<<<<<<<<<<<<<<Order details>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
-    @Test
-    public void calculate_order_value_for_selected_items_should_return_sum_of_their_prices() {
-    	List<String> testData = new ArrayList<>();
-    	testData.add("Sweet corn soup");
-    	testData.add("Vegetable lasagne");
-    	int actualAmount = restaurant.calculateTotalAmount(testData);
-    	Assertions.assertEquals(388, actualAmount);
-    }    
-   //<<<<<<<<<<<<<<<<<<<<<<<Order details>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 }
