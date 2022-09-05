@@ -68,8 +68,16 @@ public class Restaurant {
     }
     
     public int calculateTotalAmount(List<String> itemNames) {
-    	
-    	return 0;
+    	List<Item> items = this.getMenu();
+    	int finalAmount = 0;
+    	for(Item item:items) {
+    		for(String itemName:itemNames) {
+    			if(item.getName().equals(itemName)) {
+    				finalAmount+=item.getPrice();
+    			}
+    		}
+    	}
+    	return finalAmount;
     }
 
 }
